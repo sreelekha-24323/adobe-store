@@ -130,6 +130,43 @@
   --nav-height: 6.4rem;
 }
 
+html[data-theme='dark'],
+html[data-theme='dark'] .dropin-design {
+  color-scheme: dark;
+  --color-brand-300: #b8b8b8;
+  --color-brand-500: #d0d0d0;
+  --color-brand-600: #e3e3e3;
+  --color-brand-700: #fff;
+  --color-neutral-50: #17191c;
+  --color-neutral-100: #202328;
+  --color-neutral-200: #292d33;
+  --color-neutral-300: #373d45;
+  --color-neutral-400: #4b535d;
+  --color-neutral-500: #707985;
+  --color-neutral-600: #9ca5b1;
+  --color-neutral-700: #c4cbd3;
+  --color-neutral-800: #e1e5e9;
+  --color-neutral-900: #f5f6f7;
+  --color-positive-200: #263d2b;
+  --color-positive-500: #84c88a;
+  --color-positive-800: #a9e2ad;
+  --color-informational-200: #252e4a;
+  --color-informational-500: #92a3ff;
+  --color-informational-800: #bac4ff;
+  --color-warning-200: #49331f;
+  --color-warning-500: #ffc17e;
+  --color-warning-800: #ffd2a2;
+  --color-alert-200: #482626;
+  --color-alert-500: #ff9999;
+  --color-alert-800: #ffc0c0;
+  --color-button-active: var(--color-brand-700);
+  --color-button-focus: var(--color-neutral-400);
+  --color-button-hover: var(--color-brand-600);
+  --color-action-button-active: var(--color-neutral-50);
+  --color-action-button-hover: var(--color-neutral-300);
+  --background-color: var(--color-neutral-50);
+}
+
 /* fallback font */
 @font-face {
   font-family: adobe-clean;

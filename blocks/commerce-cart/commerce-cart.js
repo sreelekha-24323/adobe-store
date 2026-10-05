@@ -188,6 +188,13 @@ export default async function decorate(block) {
       enableRemoveItem: enableRemoveItem === 'true',
       undo: undo === 'true',
       slots: {
+        Heading: (headingCtx) => {
+          const header = document.createElement('div');
+          header.className = 'cart__free-shipping-message';
+          header.innerHTML = '<p><strong>Free shipping</strong> on all orders over $50!</p>';
+          headingCtx.appendChild(header);
+        },
+
         Thumbnail: (ctx) => {
           const { item, defaultImageProps } = ctx;
           const anchorWrapper = document.createElement('a');

@@ -22,6 +22,15 @@ import {
   IS_DA,
 } from './commerce.js';
 
+try {
+  const savedTheme = window.localStorage.getItem('site-theme');
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    document.documentElement.dataset.theme = savedTheme;
+  }
+} catch {
+  // Continue with the default theme when storage is unavailable.
+}
+
 /*
  * Trusted Types default policy.
  *

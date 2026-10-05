@@ -230,6 +230,44 @@ export default async function decorate(block) {
 
   const navTools = nav.querySelector('.nav-tools');
 
+  const themeToggle = document.createElement('button');
+  themeToggle.type = 'button';
+  themeToggle.className = 'nav-theme-button';
+  themeToggle.innerHTML = `
+    <svg class="nav-theme-icon nav-theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.2 15.6A8.5 8.5 0 0 1 8.4 3.8 8.5 8.5 0 1 0 20.2 15.6Z" />
+    </svg>
+    <svg class="nav-theme-icon nav-theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+    </svg>
+  `;
+
+  function updateThemeToggle() {
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+    themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+    themeToggle.title = `Switch to ${isDark ? 'light' : 'dark'} mode`;
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = nextTheme;
+    updateThemeToggle();
+
+    try {
+      window.localStorage.setItem('site-theme', nextTheme);
+    } catch {
+      // The selected theme still applies for this page when storage is unavailable.
+    }
+  });
+
+  const themeControl = document.createElement('div');
+  themeControl.className = 'theme-wrapper nav-tools-wrapper';
+  themeControl.append(themeToggle);
+  navTools.prepend(themeControl);
+  updateThemeToggle();
+
   /** Wishlist */
   const wishlist = document.createRange().createContextualFragment(`
      <div class="wishlist-wrapper nav-tools-wrapper">

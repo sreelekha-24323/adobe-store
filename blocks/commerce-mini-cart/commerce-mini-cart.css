@@ -32,3 +32,8 @@
     letter-spacing: var(--type-details-caption-1-letter-spacing);
     color: var(--color-positive-800);
 }
+
+.mini-cart__free-shipping-message{
+   font: var(--type-details-caption-1-font);
+    margin-top: var(--spacing-small);
+}

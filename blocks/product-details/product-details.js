@@ -158,9 +158,15 @@ export default async function decorate(block) {
 
     CarouselMainImage: (ctx) => {
       if (ctx.mediaType === 'image') {
+        const magnifierWrapper = document.createElement('div');
+        magnifierWrapper.classList.add('product-details__image-magnifier');
+
         tryRenderAemAssetsImage(ctx, {
           ...imageSlotConfig(ctx),
+          wrapper: magnifierWrapper,
         });
+
+        setupProductImageMagnifier(magnifierWrapper);
       }
     },
   };
@@ -563,6 +569,42 @@ function setMetaTags(product) {
  * @param ctx - The context of the slot.
  * @returns The configuration for the image slot.
  */
+function setupProductImageMagnifier(wrapper) {
+  if (!wrapper || window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+    return;
+  }
+
+  const bindImage = () => {
+    const image = wrapper.querySelector('img');
+    if (!image) {
+      window.requestAnimationFrame(bindImage);
+      return;
+    }
+
+    const updateMagnifier = (event) => {
+      const rect = wrapper.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+      image.style.transformOrigin = `${Math.min(Math.max(x, 0), 100)}% ${Math.min(Math.max(y, 0), 100)}%`;
+      image.style.transform = 'scale(2)';
+      wrapper.classList.add('is-active');
+    };
+
+    const resetMagnifier = () => {
+      image.style.transform = 'scale(1)';
+      image.style.transformOrigin = 'center center';
+      wrapper.classList.remove('is-active');
+    };
+
+    wrapper.addEventListener('mousemove', updateMagnifier);
+    wrapper.addEventListener('mouseenter', updateMagnifier);
+    wrapper.addEventListener('mouseleave', resetMagnifier);
+  };
+
+  bindImage();
+}
+
 function imageSlotConfig(ctx) {
   const { data, defaultImageProps } = ctx;
   return {

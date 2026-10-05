@@ -78,6 +78,11 @@
     width: fit-content;
 }
 
+.cart__free-shipping-message{
+   font: var(--type-details-caption-1-font);
+}
+
+
 @media (min-width: 768px) {
   .cart__wrapper {
     flex-direction: row;

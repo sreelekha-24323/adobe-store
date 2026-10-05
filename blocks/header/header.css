@@ -346,6 +346,30 @@ header nav .nav-tools-wrapper>button {
   width: 40px;
 }
 
+header nav .nav-tools .nav-theme-button {
+  display: grid;
+  place-items: center;
+}
+
+header nav .nav-theme-icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75px;
+}
+
+header nav .nav-theme-icon--sun,
+html[data-theme='dark'] header nav .nav-theme-icon--moon {
+  display: none;
+}
+
+html[data-theme='dark'] header nav .nav-theme-icon--sun {
+  display: block;
+}
+
 header nav .nav-sections .authCombineNavElement button {
   all: unset;
   cursor: pointer;
@@ -355,10 +379,16 @@ header nav .nav-sections .authCombineNavElement button {
 }
 
 header nav .nav-tools button.nav-cart-button {
-  background-image: url('../../icons/cart.svg');
-  background-repeat: no-repeat;
-  background-position: center;
   position: relative;
+}
+
+header nav .nav-tools button.nav-cart-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: currentcolor;
+  mask: url('../../icons/cart.svg') center / 24px 24px no-repeat;
+  pointer-events: none;
 }
 
 header nav .nav-tools button.nav-cart-button[data-count]::after {
@@ -390,17 +420,15 @@ header nav .nav-tools .nav-cart-status {
 }
 
 header nav .nav-tools button.nav-wishlist-button {
-  background-image: url('../../icons/heart.svg');
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: currentcolor;
+  mask: url('../../icons/heart.svg') center / 24px 24px no-repeat;
   position: relative;
 }
 
 header nav .nav-tools button.nav-search-button {
   font-size: 0;
-  background-image: url('../../icons/search.svg');
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: currentcolor;
+  mask: url('../../icons/search.svg') center / 24px 24px no-repeat;
 }
 
 header .nav-search-panel {
